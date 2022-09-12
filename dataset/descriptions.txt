@@ -1,0 +1,1 @@
+Due to hospital regulation restrictions and patient privacy concerns, the raw CTA data of the patients are only available for academic purposes. Data acquisition requires an application to be approved by the hospital ethics committee, and the content of the application includes the name of the institution and purpose of use.

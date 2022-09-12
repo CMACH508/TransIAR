@@ -1,20 +1,29 @@
 # TransIAR-Net
 
-
-
-## requirements
-
-python 3.8
-
-einops 0.4.1
-
-scikit_learn 1.1.2
-
-torch 1.7.1+cu101
+It is critical to accurately predict the rupture risk of an intracranial aneurysm (IA) for timely and appropriate treatments, because the fatality rate after rupture is 50%. The existing machine learning methods require neuroradiologists to manually measure the characteristics of IA's morphology to predict the risk of aneurysm rupture, which is time-consuming and labor-intensive and barely considers the IA neighborhood information. In this paper, we propose an end-to-end deep learning method, i.e., TransIAR net, for the task of aneurysm rupture prediction. A multi-scale deep 3D CNN is developed to automatically extract the morphological features of IA and its neighborhood information directly from the raw 3D CTA image data. A transformer module is devised to model the spatial dependence within the 3D CNN embeddings of the aneurysm and its surrounding anatomical structures, and the representation learning is strengthened to be more discriminative and predictive for the rupture prediction.
+We evaluate the TransIAR net by experiments on both balanced and unbalanced datasets. The prediction performance becomes much better when replacing the hand-crafted features by the neuroradiologists with the features learned by the TransIAR net in a traditional machine learning model like RF or SVM. The performance is further improved when the representation learning and classifier construction are jointly optimized by the TransIAR net. To the best of our knowledge, the TransIAR net is the first end-to-end model with fast and accurate prediction on the IA rupture risk from the raw 3D CTA data, which is a promising tool to assist the doctors in clinical practice.
 
 
 
-## dataset
+## Overview
+
+<img src=".\overview.png" width="100%" />
+
+
+
+## Requirements
+
+python==3.8
+
+einops==0.4.1
+
+scikit_learn==1.1.2
+
+torch==1.7.1+cu101
+
+
+
+## Dataset
 
 `dataset_cta_balanced.pkl` is generated from Balanced Dataset, each case augmented 32 times.
 
@@ -26,7 +35,7 @@ torch 1.7.1+cu101
 
 
 
-## src
+## Train and test
 
 `models.py` contains two models we proposed, one is TransIAR (TransIAR-Net without auxiliary features), the other is TransIAR_AF (TransIAR-Net with auxiliary features), i.e. the final model.
 
@@ -78,8 +87,11 @@ python test_w_af_imbalanced.py
 
 
 
-## checkpoint
+## Pre-trained Models
 
 `model_wo_af.pth` is the trained model of TransIAR, whose accuracy on Balanced Dataset  is **89.02**.
 
 `model_w_af.pth` is the trained model of TransIAR_AF, whose accuracy on Balanced Dataset  is **91.46**.
+
+
+
