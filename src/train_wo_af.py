@@ -11,18 +11,19 @@ import pickle
 
 
 def train(n_epoch = 200, BS = 128, LR=1e-4, step_size=200, dim = 256, depth = 4, heads = 4, dim_head = 256, mlp_dim = 1024):
-    manualSeed = 9089
+    manualSeed = random.randint(1, 10000)
     random.seed(manualSeed)
     torch.manual_seed(manualSeed)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     input_shape = (48,48,48)
     print("Loading data...")
-    dataset_split = pickle.load(open('../dataset/dataset_cta_balanced.pkl','rb'))
+    dataset_train = pickle.load(open('../dataset/dataset_cta_balanced_train.pkl', 'rb'))
+    dataset_test = pickle.load(open('../dataset/dataset_cta_balanced_test.pkl', 'rb'))
 
-    X_train = torch.tensor(dataset_split['vox_train'])
-    X_test = torch.tensor(dataset_split['vox_test'])
-    y_train = torch.tensor(dataset_split['y_train'], dtype=torch.long)
-    y_test = torch.tensor(dataset_split['y_test'], dtype=torch.long)
+    X_train = torch.tensor(dataset_train['vox_train'])
+    X_test = torch.tensor(dataset_test['vox_test'])
+    y_train = torch.tensor(dataset_train['y_train'], dtype=torch.long)
+    y_test = torch.tensor(dataset_test['y_test'], dtype=torch.long)
     print(X_train.shape)
     print(X_test.shape)
 
@@ -114,7 +115,7 @@ def train(n_epoch = 200, BS = 128, LR=1e-4, step_size=200, dim = 256, depth = 4,
 
         if test_acc > best_acc:
             print('Saving..')
-            torch.save(model.state_dict(), '../checkpoint/model_{}.pth'.format(test_acc))
+            # torch.save(model.state_dict(), '../checkpoint/model_{}.pth'.format(test_acc))
             best_acc = test_acc
 
         print("best test accuracy: {}".format(best_acc))

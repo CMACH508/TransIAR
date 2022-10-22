@@ -17,18 +17,20 @@ def train(n_epoch = 200, BS = 128, LR=1e-4, step_size=200, dim = 256, depth = 4,
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     input_shape = (48,48,48)
     print("Loading data...")
-    dataset_split = pickle.load(open('../dataset/dataset_cta_balanced.pkl','rb'))
+    dataset_train = pickle.load(open('../dataset/dataset_cta_balanced_train.pkl','rb'))
+    dataset_test = pickle.load(open('../dataset/dataset_cta_balanced_test.pkl', 'rb'))
 
-    X_train = torch.tensor(dataset_split['vox_train'])
-    X_test = torch.tensor(dataset_split['vox_test'])
-    y_train = torch.tensor(dataset_split['y_train'], dtype=torch.long)
-    y_test = torch.tensor(dataset_split['y_test'], dtype=torch.long)
+    X_train = torch.tensor(dataset_train['vox_train'])
+    X_test = torch.tensor(dataset_test['vox_test'])
+    y_train = torch.tensor(dataset_train['y_train'], dtype=torch.long)
+    y_test = torch.tensor(dataset_test['y_test'], dtype=torch.long)
     print(X_train.shape)
     print(X_test.shape)
 
-    idx_af = pickle.load(open('../dataset/dataset_af_balanced.pkl','rb'))
-    af_train = idx_af['chara_train']
-    af_test = idx_af['chara_test']
+    idx_af_train = pickle.load(open('../dataset/dataset_af_balanced_train.pkl','rb'))
+    idx_af_test = pickle.load(open('../dataset/dataset_af_balanced_test.pkl', 'rb'))
+    af_train = idx_af_train['chara_train']
+    af_test = idx_af_test['chara_test']
     af_train = torch.tensor(af_train, dtype=torch.float)
     af_test = torch.tensor(af_test, dtype=torch.float)
     print(af_train.shape)

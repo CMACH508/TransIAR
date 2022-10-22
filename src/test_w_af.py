@@ -23,12 +23,12 @@ model_path = '../checkpoint/model_w_af.pth'
 model.load_state_dict(torch.load(model_path))
 print("load done")
 
-dataset_split = pickle.load(open('../dataset/dataset_cta_balanced.pkl','rb'))
+dataset_split = pickle.load(open('../dataset/dataset_cta_balanced_test.pkl','rb'))
 X_test = torch.tensor(dataset_split['vox_test'])
 y_test = torch.tensor(dataset_split['y_test'], dtype=torch.long)
 print(X_test.shape)
 
-idx_af = pickle.load(open('../dataset/dataset_af_balanced.pkl','rb'))
+idx_af = pickle.load(open('../dataset/dataset_af_balanced_test.pkl','rb'))
 af_test = idx_af['chara_test']
 af_test = torch.tensor(af_test, dtype=torch.float)
 print(af_test.shape)

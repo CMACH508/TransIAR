@@ -29,9 +29,9 @@ def cal_metrics(y_true, y_pred, y_prob):
     Precision = TP / (TP + FP)
     Recall = TP / (TP + FN)
     F1_score = (2 * Precision * Recall) / (Precision + Recall)
-    print("accuracy: {}".format(round(Accuracy*100,2)))
-    print("precision: {}".format(round(Precision*100,2)))
-    print("recall: {}".format(round(Recall*100,2)))
+    print("Accuracy: {}".format(round(Accuracy*100,2)))
+    print("Precision: {}".format(round(Precision*100,2)))
+    print("Recall: {}".format(round(Recall*100,2)))
     print("F1 score: {}".format(round(F1_score*100,2)))
 
     AUC = auc(y_true, y_prob)
