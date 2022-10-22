@@ -113,7 +113,7 @@ python test_w_af_imbalanced.py
 
 
 
-Note that only `python test_wo_af.py` and `python test_w_af.py` can be executed due to data inaccessibility, while you can train and test our method on your own datasets.
+Note that only `python test_wo_af.py` and `python test_w_af.py` can be executed successfully due to data inaccessibility, while you can train and test our method on your own datasets.
 
 
 
