@@ -25,13 +25,39 @@ torch==1.7.1+cu101
 
 ## Dataset
 
-`dataset_cta_balanced.pkl` is generated from Balanced Dataset, each case augmented 32 times.
+`dataset_cta_balanced_train.pkl` and `dataset_cta_balanced_test.pkl` are 3D CTA cubes generated from Balanced Dataset, each case augmented 32 times.
 
-`dataset_cta_noused.pkl` contains  unused 167 cases of ruptured IAs, each case augmented 32 times.
+`dataset_cta_noused.pkl` contains 3D CTA cubes of unused 167 cases (ruptured IAs), each case augmented 32 times.
 
-`dataset_af_balanced.pkl` is the corresponding auxiliary features of dataset_cta_balanced.pkl.
+`dataset_af_balanced_train.pkl` and `dataset_af_balanced_test.pkl`  are the corresponding auxiliary features of Balanced Dataset.
 
-`dataset_af_noused.pkl` is the corresponding auxiliary features of dataset_cta_noused.pkl.
+`dataset_af_noused.pkl` is the corresponding auxiliary features of `dataset_cta_noused.pkl`.
+
+
+
+We only provide the preprocessed balanced test set (82 cases)  `dataset_cta_balanced_test.pkl` (https://drive.google.com/file/d/100Pa_vtNoRGIlk5Q0RruWFVj5WtcN8H-/view?usp=sharing) and `dataset_af_balanced_test.pkl` (https://drive.google.com/file/d/1HYA-EAzCp8D5m1xYQpqnNn__63Nya05e/view?usp=sharing) due to hospital regulation restrictions and patient privacy concerns. 
+
+
+
+To test our model, download `dataset_cta_balanced_test.pkl` and `dataset_af_balanced_test.pkl` to /dataset folder and then run `python test_wo_af.py` and `python test_w_af.py`, which are expected to get the following output respectively,
+
+```
+Accuracy: 89.02
+Precision: 88.1
+Recall: 90.24
+F1 score: 89.16
+AUC: 92.15
+AUPR: 93.16
+```
+
+```
+Accuracy: 91.46
+Precision: 94.74
+Recall: 87.8
+F1 score: 91.14
+AUC: 92.09
+AUPR: 89.58
+```
 
 
 
@@ -51,7 +77,7 @@ To train TransIAR, run
 python train_wo_af.py
 ```
 
-To train TransIAR_AF , run
+To train TransIAR_A , run
 
 ```
 python train_w_af.py
@@ -84,6 +110,10 @@ To test TransIAR_AF on Imbalanced Dataset, run
 ```
 python test_w_af_imbalanced.py
 ```
+
+
+
+Note that only `python test_wo_af.py` and `python test_w_af.py` can be executed due to data inaccessibility, while you can train and test our method on your own datasets.
 
 
 
