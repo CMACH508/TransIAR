@@ -77,7 +77,7 @@ To train TransIAR, run
 python train_wo_af.py
 ```
 
-To train TransIAR_A , run
+To train TransIAR_AF , run
 
 ```
 python train_w_af.py
