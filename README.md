@@ -1,7 +1,12 @@
 # TransIAR-Net
 
-It is critical to accurately predict the rupture risk of an intracranial aneurysm (IA) for timely and appropriate treatments, because the fatality rate after rupture is 50%. The existing machine learning methods require neuroradiologists to manually measure the characteristics of IA's morphology to predict the risk of aneurysm rupture, which is time-consuming and labor-intensive and barely considers the IA neighborhood information. In this paper, we propose an end-to-end deep learning method, i.e., TransIAR net, for the task of aneurysm rupture prediction. A multi-scale deep 3D CNN is developed to automatically extract the morphological features of IA and its neighborhood information directly from the raw 3D CTA image data. A transformer module is devised to model the spatial dependence within the 3D CNN embeddings of the aneurysm and its surrounding anatomical structures, and the representation learning is strengthened to be more discriminative and predictive for the rupture prediction.
-We evaluate the TransIAR net by experiments on both balanced and unbalanced datasets. The prediction performance becomes much better when replacing the hand-crafted features by the neuroradiologists with the features learned by the TransIAR net in a traditional machine learning model like RF or SVM. The performance is further improved when the representation learning and classifier construction are jointly optimized by the TransIAR net. To the best of our knowledge, the TransIAR net is the first end-to-end model with fast and accurate prediction on the IA rupture risk from the raw 3D CTA data, which is a promising tool to assist the doctors in clinical practice.
+This repository contains the source code, trained model and part of the test set for our work: Towards an end-to-end prediction of rupture status of intracranial aneurysm via deep learning. 
+
+
+
+## Introduction
+
+Intracranial aneurysms (IA) seriously threaten human health, and ruptured IA may even cause death of patients. Early assessment on the risk of IA rupture is important for timely and appropriate treatment for patients. To address this issue, we propose an end-to-end deep learning model (TransIAR net) for accurate IA rupture status prediction, without laborious human efforts on hand-crafted morphological features. It takes 3D computed tomography angiography (CTA) data as input and automatically extracts features of IA geometry and neighborhood information. Quantitative experiments demonstrate the superior performance of the proposed method. To the best of our knowledge, TransIAR net is the first end-to-end method for IA rupture prediction directly on the 3D CTA data. It is a promising artificial intelligence tool to assist the doctors for efficient, accurate clinical diagnosis and timely treatment of IA patients.
 
 
 
@@ -15,11 +20,21 @@ We evaluate the TransIAR net by experiments on both balanced and unbalanced data
 
 python==3.8
 
-einops==0.4.1
+einops==0.5.0
 
-scikit_learn==1.1.2
+numpy==1.22.3
 
-torch==1.7.1+cu101
+scikit_learn==1.1.3
+
+torch==1.12.1
+
+
+
+Install dependencies:
+
+```
+pip install -r requirements.txt
+```
 
 
 
@@ -122,6 +137,5 @@ Note that only `python test_wo_af.py` and `python test_w_af.py` can be executed 
 `model_wo_af.pth` is the trained model of TransIAR, whose accuracy on Balanced Dataset  is **89.02**.
 
 `model_w_af.pth` is the trained model of TransIAR_AF, whose accuracy on Balanced Dataset  is **91.46**.
-
 
 
