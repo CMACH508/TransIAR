@@ -11,19 +11,15 @@ import pickle
 import numpy as np
 
 
-def train(n_epoch = 200, BS = 128, LR=1e-4, BFS=1):
+def train(n_epoch = 200, BS = 128, LR=1e-4):
     manualSeed = random.randint(1, 10000)
     random.seed(manualSeed)
     torch.manual_seed(manualSeed)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     input_shape = (3, 224, 224)
     print("Loading data...")
-    if BFS:
-        dataset_train = pickle.load(open('../../dataset_2d/dataset_2d_train_bfs.pkl', 'rb'))
-        dataset_test = pickle.load(open('../../dataset_2d/dataset_2d_test_bfs.pkl', 'rb'))
-    else:
-        dataset_train = pickle.load(open('../../dataset_2d/dataset_2d_train.pkl', 'rb'))
-        dataset_test = pickle.load(open('../../dataset_2d/dataset_2d_test.pkl', 'rb'))
+    dataset_train = pickle.load(open('../../dataset_2d/dataset_2d_train.pkl', 'rb'))
+    dataset_test = pickle.load(open('../../dataset_2d/dataset_2d_test.pkl', 'rb'))
 
     X_train = torch.tensor(np.array(dataset_train['X_train']))
     X_test = torch.tensor(np.array(dataset_test['X_test']))
@@ -124,13 +120,7 @@ def train(n_epoch = 200, BS = 128, LR=1e-4, BFS=1):
 
 
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description='Train neural net on IA data.')
-    parser.add_argument('--is_bfs', type=int, default=1)
-    args = parser.parse_args()
-    print(args)
     n_epoch = 200
     BS = 20
     LR = 5*1e-7
-    BFS = args.is_bfs
-    train(n_epoch, BS, LR, BFS)
+    train(n_epoch, BS, LR)

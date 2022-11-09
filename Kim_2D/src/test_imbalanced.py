@@ -6,28 +6,18 @@ import torch.nn.functional as F
 from AlexNet_v2 import AlexNet
 import torch.utils.data as Data
 import pickle
-from utils import cal_metrics
+from evaluate import cal_metrics
 import numpy as np
 
-import argparse
-parser = argparse.ArgumentParser(description='Train neural net on IA data.')
-parser.add_argument('--is_bfs', type=int, default=1)
-args = parser.parse_args()
-BFS = args.is_bfs
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 model = AlexNet()
 model.to(device)
 
-if BFS:
-    model_path = '../checkpoint/model_bfs.pth'
-    dataset_split = pickle.load(open('../../dataset_2d/dataset_2d_test_bfs.pkl','rb'))
-    dataset_nouse = pickle.load(open('../../dataset_2d/dataset_2d_nouse_bfs.pkl','rb'))
-else:
-    model_path = '../checkpoint/model.pth'
-    dataset_split = pickle.load(open('../../dataset_2d/dataset_2d_test.pkl','rb'))
-    dataset_nouse = pickle.load(open('../../dataset_2d/dataset_2d_nouse.pkl','rb'))
+model_path = '../checkpoint/model.pth'
+dataset_split = pickle.load(open('../../dataset_2d/dataset_2d_test.pkl','rb'))
+dataset_nouse = pickle.load(open('../../dataset_2d/dataset_2d_nouse.pkl','rb'))
 
 model.load_state_dict(torch.load(model_path))
 print("load done")
@@ -85,3 +75,8 @@ print("test accuracy: {}".format(test_acc))
 print("0 accuracy: {}, 1 accuracy: {}".format(test_acc_each[0], test_acc_each[1]))
 
 cal_metrics(y_true, y_pred, y_prob)
+
+
+import numpy as np
+np.savetxt('../tp_save/true_kim_imb.txt', y_true, fmt='%d')
+np.savetxt('../tp_save/prob_kim_imb.txt', y_prob)
