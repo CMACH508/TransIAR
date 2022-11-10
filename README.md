@@ -40,17 +40,13 @@ pip install -r requirements.txt
 
 ## Dataset
 
-`dataset_cta_balanced_train.pkl` and `dataset_cta_balanced_test.pkl` are 3D CTA cubes generated from Balanced Dataset, each case augmented 32 times.
-
-`dataset_cta_noused.pkl` contains 3D CTA cubes of unused 167 cases (ruptured IAs), each case augmented 32 times.
+`dataset_cta_balanced_train.pkl` and `dataset_cta_balanced_test.pkl` are 3D CTA cubes of Balanced Dataset, each case augmented 32 times.
 
 `dataset_af_balanced_train.pkl` and `dataset_af_balanced_test.pkl`  are the corresponding auxiliary features of Balanced Dataset.
 
-`dataset_af_noused.pkl` is the corresponding auxiliary features of `dataset_cta_noused.pkl`.
 
 
-
-We only provide the preprocessed balanced test set (82 cases)  `dataset_cta_balanced_test.pkl` (https://drive.google.com/file/d/100Pa_vtNoRGIlk5Q0RruWFVj5WtcN8H-/view?usp=sharing) and `dataset_af_balanced_test.pkl` (https://drive.google.com/file/d/1HYA-EAzCp8D5m1xYQpqnNn__63Nya05e/view?usp=sharing) due to hospital regulation restrictions and patient privacy concerns. 
+We only provide the balanced test set (82 cases) [`dataset_cta_balanced_test.pkl`](https://drive.google.com/file/d/100Pa_vtNoRGIlk5Q0RruWFVj5WtcN8H-/view?usp=sharing) and [`dataset_af_balanced_test.pkl`](https://drive.google.com/file/d/1HYA-EAzCp8D5m1xYQpqnNn__63Nya05e/view?usp=sharing) due to hospital regulation restrictions and patient privacy concerns. 
 
 
 
@@ -106,24 +102,10 @@ To test TransIAR on Balanced Dataset, run
 python test_wo_af.py
 ```
 
-To test TransIAR on Imbalanced Dataset, run
-
-```
-python test_wo_af_imbalanced.py
-```
-
-
-
 To test TransIAR_AF on Balanced Dataset, run
 
 ```
 python test_w_af.py
-```
-
-To test TransIAR_AF on Imbalanced Dataset, run
-
-```
-python test_w_af_imbalanced.py
 ```
 
 
@@ -139,3 +121,24 @@ Note that only `python test_wo_af.py` and `python test_w_af.py` can be executed 
 `model_w_af.pth` is the trained model of TransIAR_AF, whose accuracy on Balanced Dataset  is **91.46**.
 
 
+
+## Comparisons
+
+We consider relevant SOTA 2D or 3D models in the literature, including the work of Kim et al., M3T and DAResUNET, and reproduce them for comparisons. It should be noted that the existing 3D models are not for the IA rupture status prediction problem, and thus we modify them appropriately to adapt to the problem setting in this paper.
+
+In addition to the Balanced and Imbalanced datasets, we also collected CTA images of 43 patients from other four hospitals and merge them as an external test set. 
+
+We evaluate our model and other competing methods on the external test set without auxiliary features. The results are as follows:
+
+| Models         | Accuracy  | Precision | Recall    | AUC       | AUPR      | F1 score  |
+| -------------- | --------- | --------- | --------- | --------- | --------- | --------- |
+| $RF^m$         | 65.12     | 76.92     | 68.97     | 72.66     | 83.99     | 72.73     |
+| $SVM^m$        | 58.14     | 82.35     | 48.28     | 80.05     | 89.79     | 60.87     |
+| $Kim\ et\ al.$ | 65.12     | **100.0** | 48.28     | 91.63     | 96.01     | 65.12     |
+| $M3T$          | 76.74     | 77.14     | **93.10** | 82.76     | 89.38     | 84.38     |
+| $DAResUNET^b$  | 79.07     | 95.45     | 72.41     | 95.32     | 97.70     | 82.35     |
+| $DAResUNET^c$  | 72.09     | 86.96     | 68.97     | 89.66     | 94.27     | 76.92     |
+| $IAR$          | 90.70     | 96.30     | 89.66     | 95.32     | 97.80     | 92.86     |
+| $TransIAR$     | **93.02** | **100.0** | 89.66     | **98.03** | **99.17** | **94.55** |
+
+The results on the external test set shows that TransIAR has good generalization performance and is potentially a useful model for clinical utility to help radiologists in the assessment of IA rupture risk.
