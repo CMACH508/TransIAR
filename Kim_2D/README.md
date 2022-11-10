@@ -38,12 +38,6 @@ To test the model on Balanced Dataset of projection data, run
 python test.py
 ```
 
-To test the model on Imbalanced Dataset of projection data, run
-
-```
-python test_imbalanced.py
-```
-
 
 
 Note that only `python test.py`  can be executed successfully due to data inaccessibility, while you can train and test the method on your own datasets.
