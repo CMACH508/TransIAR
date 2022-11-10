@@ -36,11 +36,7 @@ To test M3T on Balanced Dataset, run
 python test.py
 ```
 
-To test M3T on Imbalanced Dataset, run
 
-```
-python test_imbalanced.py
-```
 
 Note that only `python test.py` can be executed successfully due to data inaccessibility, while you can train and test the method on your own datasets.
 
