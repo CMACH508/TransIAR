@@ -1,3 +1,0 @@
-The following dataset are used by TransIAR and other 3D methods:
-dataset_cta_balanced_test.pkl (https://drive.google.com/file/d/100Pa_vtNoRGIlk5Q0RruWFVj5WtcN8H-/view?usp=sharing)
-dataset_af_balanced_test.pkl (https://drive.google.com/file/d/1HYA-EAzCp8D5m1xYQpqnNn__63Nya05e/view?usp=sharing)
