@@ -44,7 +44,15 @@ pip install -r requirements.txt
 
 `dataset_af_balanced_train.pkl` and `dataset_af_balanced_test.pkl`  are the corresponding auxiliary features of Balanced Dataset.
 
+You can obtain the required training and test data according to the following code examples:
 
+```
+X_train = torch.tensor(dataset_train['vox_train'])[:,0:1,:,:,:]  \#\# 96-sized patches (without BFS)
+X_train = torch.tensor(dataset_train['vox_train'])[:,1:2,:,:,:]  \#\# 96-sized patches (with BFS)
+X_train = torch.tensor(dataset_train['vox_train'])[:,2:3,:,:,:]  \#\# 48-sized patches (without BFS)
+X_train = torch.tensor(dataset_train['vox_train'])[:,3:4,:,:,:]  \#\# 48-sized patches (with BFS)
+X_test = torch.tensor(dataset_test['vox_test'])[:,0:1,:,:,:]     \#\# X_test is the same
+```
 
 We only provide the balanced test set (82 cases) [`dataset_cta_balanced_test.pkl`](https://drive.google.com/file/d/100Pa_vtNoRGIlk5Q0RruWFVj5WtcN8H-/view?usp=sharing) and [`dataset_af_balanced_test.pkl`](https://drive.google.com/file/d/1HYA-EAzCp8D5m1xYQpqnNn__63Nya05e/view?usp=sharing) due to hospital regulation restrictions and patient privacy concerns. 
 
@@ -124,7 +132,7 @@ Note that only `python test_wo_af.py` and `python test_w_af.py` can be executed 
 
 ## Comparisons
 
-We consider relevant SOTA 2D or 3D models in the literature, including the work of Kim et al., M3T and DAResUNET, and reproduce them for comparisons. It should be noted that the existing 3D models are not for the IA rupture status prediction problem, and thus we modify them appropriately to adapt to the problem setting in this paper.
+We consider relevant SOTA 2D or 3D models in the literature, including the work of Kim et al., M3T and DAResUNET, and reproduce them for comparisons. It should be noted that the existing 3D models are not for the IA rupture status prediction problem, and thus we modify them appropriately to adapt to the problem setting in this paper. We use 48+96 (without BFS) as the input for the compared 3D methods (M3T and DAResUNET) for a fair comparison.
 
 In addition to the Balanced and Imbalanced datasets, we also collected CTA images of 43 patients from other four hospitals and merge them as an external test set. 
 
@@ -135,10 +143,10 @@ We evaluate our model and other competing methods on the external test set witho
 | $RF^m$         | 65.12     | 76.92     | 68.97     | 72.66     | 83.99     | 72.73     |
 | $SVM^m$        | 58.14     | 82.35     | 48.28     | 80.05     | 89.79     | 60.87     |
 | $Kim\ et\ al.$ | 65.12     | **100.0** | 48.28     | 91.63     | 96.01     | 65.12     |
-| $M3T$          | 76.74     | 77.14     | **93.10** | 82.76     | 89.38     | 84.38     |
-| $DAResUNET^b$  | 79.07     | 95.45     | 72.41     | 95.32     | 97.70     | 82.35     |
-| $DAResUNET^c$  | 72.09     | 86.96     | 68.97     | 89.66     | 94.27     | 76.92     |
-| $IAR$          | 90.70     | 96.30     | 89.66     | 95.32     | 97.80     | 92.86     |
-| $TransIAR$     | **93.02** | **100.0** | 89.66     | **98.03** | **99.17** | **94.55** |
+| $M3T$          | 76.74     | 95.24     | 68.97     | 94.09     | 97.12     | 80.00     | 
+| $DAResUNET^b$  | 83.72     | 95.83     | 79.31     | 94.58     | 97.54     | 86.79     | 
+| $DAResUNET^c$  | 88.37     | **100.0** | 82.76     | 97.29     | 98.71     | 90.57     | 
+| $IAR$          | 90.70     | 96.30     | **89.66** | 95.32     | 97.80     | 92.86     |
+| $TransIAR$     | **93.02** | **100.0** | **89.66** | **98.03** | **99.17** | **94.55** |
 
 The results on the external test set shows that TransIAR has good generalization performance and is potentially a useful model for clinical utility to help radiologists in the assessment of IA rupture risk.
