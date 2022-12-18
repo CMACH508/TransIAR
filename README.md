@@ -47,11 +47,11 @@ pip install -r requirements.txt
 You can obtain the required training and test data according to the following code examples:
 
 ```
-X_train = torch.tensor(dataset_train['vox_train'])[:,0:1,:,:,:]  \#\# 96-sized patches (without BFS)
-X_train = torch.tensor(dataset_train['vox_train'])[:,1:2,:,:,:]  \#\# 96-sized patches (with BFS)
-X_train = torch.tensor(dataset_train['vox_train'])[:,2:3,:,:,:]  \#\# 48-sized patches (without BFS)
-X_train = torch.tensor(dataset_train['vox_train'])[:,3:4,:,:,:]  \#\# 48-sized patches (with BFS)
-X_test = torch.tensor(dataset_test['vox_test'])[:,0:1,:,:,:]     \#\# X_test is the same
+X_train = torch.tensor(dataset_train['vox_train'])[:,0:1,:,:,:]  ## 96-sized patches (without BFS)
+X_train = torch.tensor(dataset_train['vox_train'])[:,1:2,:,:,:]  ## 96-sized patches (with BFS)
+X_train = torch.tensor(dataset_train['vox_train'])[:,2:3,:,:,:]  ## 48-sized patches (without BFS)
+X_train = torch.tensor(dataset_train['vox_train'])[:,3:4,:,:,:]  ## 48-sized patches (with BFS)
+X_test = torch.tensor(dataset_test['vox_test'])[:,0:1,:,:,:]     ## X_test is the same
 ```
 
 We only provide the balanced test set (82 cases) [`dataset_cta_balanced_test.pkl`](https://drive.google.com/file/d/100Pa_vtNoRGIlk5Q0RruWFVj5WtcN8H-/view?usp=sharing) and [`dataset_af_balanced_test.pkl`](https://drive.google.com/file/d/1HYA-EAzCp8D5m1xYQpqnNn__63Nya05e/view?usp=sharing) due to hospital regulation restrictions and patient privacy concerns. 
