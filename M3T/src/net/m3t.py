@@ -14,12 +14,12 @@ from net.transformer import Transformer
 
 
 class M3T(nn.Module):
-    def __init__(self, n_classes=2, input_shape=(48, 48, 48), dim = 256, depth = 8, heads = 8, dim_head = 768, mlp_dim = 768):
+    def __init__(self, n_classes=2, input_shape=(48, 48, 48), input_channel = 1, dim = 256, depth = 8, heads = 8, dim_head = 768, mlp_dim = 768):
         super(M3T, self).__init__()
         self.n_classes = n_classes
         self.input_shape = input_shape
 
-        self.cnn_3d = CNN_3D()
+        self.cnn_3d = CNN_3D(input_channel)
         self.c_re = nn.Conv3d(in_channels=32, out_channels=3, kernel_size=1, stride=1)
         pretrained_model_root = '../pretrained/'
         if not os.path.exists(pretrained_model_root):
