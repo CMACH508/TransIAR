@@ -27,13 +27,13 @@ DAResUNet is a 3-dimensional (3D) CNN for the segmentation of IAs from digital s
 To train the encoder+classifier, run
 
 ```
-python train --is_unet 1
+python train.py --is_unet 0
 ```
 
 To train the unet+classifier (with reconstruction loss), run
 
 ```
-python train --is_unet 0
+python train.py --is_unet 1
 ```
 
 To test the encoder+classifier on Balanced Dataset, run
@@ -56,9 +56,42 @@ To run `python test_enc.py` and `python test_unet.py`, download `model_enc.pth` 
 
 
 
+Note that the input above is 96-sized patches (without BFS). For a fair comparison, we use 48+96 (without BFS) as the input:
+
+To train the encoder+classifier, run
+
+```
+python train_2c.py --is_unet 0
+```
+
+To train the unet+classifier (with reconstruction loss), run
+
+```
+python train_2c.py --is_unet 1
+```
+
+To test the encoder+classifier on Balanced Dataset, run
+
+```
+python test_balanced_2c.py --is_unet 0
+```
+
+To test the unet+classifier on Balanced Dataset, run
+
+```
+python test_balanced_2c.py --is_unet 1
+```
+
+To run `python test_balanced_2c`, download `model_isunet0_0.8415.pth` (https://drive.google.com/file/d/12D46u-wyoULvW5Jy2PbRn7bwWlRshNLL/view?usp=share_link) and `model_isunet1_0.8415.pth` (https://drive.google.com/file/d/1FDBtdtIR77LGyoTUjpMkJy1DTDn74wl3/view?usp=share_link) to ./checkpoint.
+
+
+
 ## Pre-trained Models
 
 `model_enc.pth` is the trained model of encoder+classifier, whose accuracy on Balanced Dataset is 84.15.
 
 `model_unet.pth` is the trained model of unet+classifier, whose accuracy on Balanced Dataset is 82.93.
 
+`model_isunet0_0.8415.pth` is the trained model of encoder+classifier with 2 channel input, whose accuracy on Balanced Dataset is 84.15.
+
+`model_isunet1_0.8415.pth` is the trained model of unet+classifier with 2 channel input, whose accuracy on Balanced Dataset is 84.15.
