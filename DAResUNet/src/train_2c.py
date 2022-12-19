@@ -40,8 +40,8 @@ def train(n_epoch=200, BS=128, LR=1e-4):
 
     input_shape = (48, 48, 48)
 
-    dataset_train = pickle.load(open('../../../dataset/dataset_cta_balanced_train.pkl', 'rb'))
-    dataset_test = pickle.load(open('../../../dataset/dataset_cta_balanced_test.pkl', 'rb'))
+    dataset_train = pickle.load(open('../../dataset/dataset_cta_balanced_train.pkl', 'rb'))
+    dataset_test = pickle.load(open('../../dataset/dataset_cta_balanced_test.pkl', 'rb'))
 
     X_train_96 = torch.tensor(dataset_train['vox_train'])[:,0:1,:,:,:]
     X_test_96 = torch.tensor(dataset_test['vox_test'])[:,0:1,:,:,:]
