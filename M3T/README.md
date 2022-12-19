@@ -44,6 +44,26 @@ To run `python test.py`, download `model.pth` (https://drive.google.com/file/d/1
 
 
 
+Note that the input above is 96-sized patches (without BFS). For a fair comparison, we use 48+96 (without BFS) as the input:
+
+To train M3T, run
+
+```
+python train_2c.py
+```
+
+To test M3T on Balanced Dataset, run
+
+```
+python test_balanced_2c.py
+```
+
+To run `python test_balanced_2c.py`, download `model_0.8537.pth` (https://drive.google.com/file/d/1WaiuffEZ8Hby-ohX4CTi7oZcvFk9mOp4/view?usp=share_link)  to ./checkpoint.
+
+
+
 ## Pre-trained Model
 
 `model.pth` is the trained model of M3T, whose accuracy on Balanced Dataset is **80.49**.
+
+`model_0.8537` is the trained model of M3T with 2 channel input, whose accuracy on Balanced Dataset is **85.37**.
