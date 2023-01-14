@@ -1,6 +1,6 @@
 # TransIAR-Net
 
-This repository contains the source code, trained model and part of the test set for our work: Towards an end-to-end prediction of rupture status of intracranial aneurysm via deep learning. 
+This repository contains the source code, trained model and part of the test set for our work: A deep learning method for an end-to-end prediction of rupture status of intracranial aneurysm. 
 
 
 
