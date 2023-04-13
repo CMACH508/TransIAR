@@ -23,7 +23,7 @@ def save_nii(img, path):
     sitk.WriteImage(out, path)
 
 
-def crop_v(id, size = 32):
+def crop(id, size = 32):
     '''
     :param id: file name
     :param size: cube size
@@ -44,7 +44,7 @@ def crop_v(id, size = 32):
     return img_with_v[boundary[0]:boundary[1],boundary[2]:boundary[3],boundary[4]:boundary[5]]
 
 
-def process_(cube, thresh1 = 0.6):
+def bfs(cube, thresh1 = 0.6):
     '''
     :param cube: 3d array
     :return: 3d array
@@ -110,14 +110,14 @@ def process(cube, thresh = 0.6):
     :param thresh: float
     :return: 3d array
     '''
-    cube_p, visited, num = process_(cube, thresh)
+    cube_p, visited, num = bfs(cube, thresh)
     size = cube.shape[0]
     flag = sum(visited[0,:,:].reshape(-1)) + sum(visited[size-1,:,:].reshape(-1)) +\
            sum(visited[:,0,:].reshape(-1)) + sum(visited[:,size-1,:].reshape(-1)) +\
            sum(visited[:,:,0].reshape(-1)) + sum(visited[:,:,size-1].reshape(-1))
     while num < 125 or flag < 1:
         thresh -= 0.05
-        cube_p, visited, num = process_(cube, thresh)
+        cube_p, visited, num = bfs(cube, thresh)
         flag = sum(visited[0,:,:].reshape(-1)) + sum(visited[size-1,:,:].reshape(-1)) +\
            sum(visited[:,0,:].reshape(-1)) + sum(visited[:,size-1,:].reshape(-1)) +\
            sum(visited[:,:,0].reshape(-1)) + sum(visited[:,:,size-1].reshape(-1))
